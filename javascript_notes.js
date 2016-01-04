@@ -35,3 +35,21 @@ JavaScript uses prototypes where many other object-oriented languages use classe
 with javascript you write statements , each statement specifies a small part of a computation and together all the sttaements create the behaviour of th epage
 
 loops in js: while, for, for in , forEach 
+
+
+document.write is used on an HTML page to display text on the screen.
+
+A more accurate and safer syntax is window.document.write( )
+
+document.write is not recommended in modern programming because it has some issues, one of them being that it rewrites the page. It is a bit outdated. However it is still used a lot. innerHTML might be an alternative if done carefully.
+
+DW executed after the page has finished loading will overwrite the page, or write a new page, or not work
+DW executes where encountered: it cannot inject at a given node point
+
+DW is effectively writing serialised text which is not the way the DOM works conceptually, and is an easy way to create bugs (.innerHTML has the same problem)
+
+http://stackoverflow.com/questions/802854/why-is-document-write-considered-a-bad-practice
+
+console.log is not really part of the JavaScript standard. It is an addition to JavaScript when JavaScript is used on a browser, specifically on a JavaScript console. (not viewd on the webpage, you have to see it in the developer tools)
+
+http://stackoverflow.com/questions/436411/where-is-the-best-place-to-put-script-tags-in-html-markup
