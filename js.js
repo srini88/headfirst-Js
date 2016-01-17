@@ -1,27 +1,71 @@
-var scoop = 5;
+
+// Return a random number between 0 (inclusive) and 1 (exclusive):
+
+// Math.random();
+// The result could be:
+
+// 0.700667236931622
+console.log(Math.random());
+// random number between 1 and 10 
+console.log(Math.floor(Math.random() * 10 )+1);
+// Math.min() and Math.max() can be used to find the lowest or highest value in a list of arguments:
+console.log(Math.min(4, 5, 9));
+console.log(Math.max(4, 5, 9));
+
+console.log(Math.ceil(4.5));
+console.log(Math.floor(4.5));
 
 
-while (scoop >0){
-	document.write("scoop decrementing  <br>" + scoop);
-	scoop--;
 
+
+// The parseInt() function parses a string and returns an integer.
+
+// The radix parameter is used to specify which numeral system to be used, for example, a radix of 16 (hexadecimal) indicates that the number in the string should be parsed from a hexadecimal number to a decimal number.
+
+
+// The radix is another name for base, i.e. 2 for binary, 10 for decimal, 16 for hexadecimal
+
+// If the radix parameter is omitted, JavaScript assumes the following:
+
+// If the string begins with "0x", the radix is 16 (hexadecimal)
+// If the string begins with "0", the radix is 8 (octal). This feature is deprecated
+// If the string begins with any other value, the radix is 10 (decimal)
+// Note: Only the first number in the string is returned!
+
+// Note: Leading and trailing spaces are allowed.
+
+// Note: If the first character cannot be converted to a number, parseInt() returns NaN.
+
+// Note: Older browsers will result parseInt("010") as 8, because older versions of ECMAScript, (older than ECMAScript 5, uses the octal radix (8) as default when the string begins with "0". As of ECMAScript 5, the default is the decimal radix (10).
+
+//var a = parseInt(prompt("enter number between 5 and 7"),10);   // it takes as a string not number, so use parseInt
+
+var a = Number(prompt("enter number between 5 and 7"),10); 
+
+
+switch(a)
+{
+	case 5:  
+	console.log('you entered 5');
+	break;
+
+	case 6: 
+	console.log('you entered 6');
+	break;
+
+	case 7: 
+	console.log('you entered 7');
+	break;
+
+	default:
+	console.log('you didnt enter between 5 and 7');
 }
-//op scoop decrementing 5scoop decrementing 4scoop decrementing 3scoop decrementing 2scoop decrementing 1
+// parseInt("123hui")
+// returns 123
 
-// Use the \n for a newline character.
+// Number("123hui")
+// returns NaN
 
-// document.write("\n");
-// You can also have more than one:
+// In other words parseInt() parses up to the first non-digit and returns whatever it had parsed. Number() wants to convert the entire string into a number, which can also be a float BTW.
 
-// document.write("\n\n\n"); // 3 new lines!  My oh my!
-// However, if this is rendering to HTML, you will want to use the HTML tag for a newline:
-
-// document.write("<br>");
-// The string Hello\n\nTest in your source will look like this:
-
-// Hello!
-
-// Test
-// The string Hello<br><br>Test will look like this in HTML source:
-
-// Hello<br><br>Test
+// Well, they are semantically different, the Number constructor called as a function performs type conversion and parseInt performs parsing,
