@@ -40,8 +40,15 @@ console.log(Math.floor(4.5));
 
 //var a = parseInt(prompt("enter number between 5 and 7"),10);   // it takes as a string not number, so use parseInt
 
-var a = Number(prompt("enter number between 5 and 7"),10); 
 
+// pronmt always returns a string, not a number - so converting it 
+
+//var a = Number(prompt("enter number between 5 and 7"),10); 
+
+
+// var b ;
+
+// console.log(b);  // prints undefined, if you dont provide an initial value in JS it takes undefined 
 
 switch(a)
 {
@@ -58,7 +65,7 @@ switch(a)
 	break;
 
 	default:
-	console.log('you didnt enter between 5 and 7');
+	console.log('you didnt enter between 5 and 7');  // in the prompt when you click cancel, it is printing the default 
 }
 // parseInt("123hui")
 // returns 123
@@ -69,3 +76,4 @@ switch(a)
 // In other words parseInt() parses up to the first non-digit and returns whatever it had parsed. Number() wants to convert the entire string into a number, which can also be a float BTW.
 
 // Well, they are semantically different, the Number constructor called as a function performs type conversion and parseInt performs parsing,
+

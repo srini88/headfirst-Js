@@ -53,3 +53,7 @@ http://stackoverflow.com/questions/802854/why-is-document-write-considered-a-bad
 console.log is not really part of the JavaScript standard. It is an addition to JavaScript when JavaScript is used on a browser, specifically on a JavaScript console. (not viewd on the webpage, you have to see it in the developer tools)
 
 http://stackoverflow.com/questions/436411/where-is-the-best-place-to-put-script-tags-in-html-markup
+
+
+arguments when called a function, 
+parameters in a function definition
