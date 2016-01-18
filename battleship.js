@@ -3,9 +3,16 @@ var car = {
 	model : "Q50",
 	year : 2015, 
 	started: false,
+	fuel: 0,
 	drive: function(){
 		if (this.started){
-			console.log("car is started and ready to go");
+			if (this.fuel > 0){
+				console.log("car is started and ready to go");
+				this.fuel = this.fuel -1; // we reducing one point for every start 	
+			}
+			else{
+				console.log("We ran out of fuel ");
+			}
 		}
 		else{
 			console.log("car is not started. start it firstt");
@@ -15,48 +22,41 @@ var car = {
 		this.started = true;
 	},
 	stop: function(){
-		this.started = false; // started is a property of car object , to access you got to use this
+		this.started = false; 
+	},
+	addFuel : function(points){
+		console.log("adding fuel points: " + points);
+		this.fuel = points;
 	}
 };
 
-// this is that wahtever a method is called in the bdy of that method you can count on this to be assigned to the object whose method was called 
-// console.log(car.drive());
-// // starting the car then driving
-// console.log(car.start());
-// console.log(car.drive());
+//car.start();
+car.drive();
+car.start();
 
+car.addFuel(2);
+car.drive();
+car.drive();
+car.drive();
+// car is not started. start it firstt
+// battleship.js:28 adding fuel points: 2
+// battleship.js:10 car is started and ready to go
+// battleship.js:10 car is started and ready to go
+// battleship.js:14 We ran out of fuel
 
-// iterate over all the properties in the object car 
-// using for in iteration 
+// predefined objects in JS 
+// date 
+// math
+// regexp
+// json
+// document
+// window
+// console
 
-// for (prop in car){
-// 	console.log(prop + ": "  + car[prop] + " ");
-// }
-// //op 
-// make: infiniti 
-// battleship.js:33 model: Q50 
-// battleship.js:33 year: 2015 
-// battleship.js:33 started: false 
-// battleship.js:33 drive: function (){
-// 		if (this.started){
-// 			console.log("car is started and ready to go");
-// 		}
-// 		else{
-// 			console.log("car is not started. start it firstt");
-// 		}
-// 	} 
-// battleship.js:33 start: function (){
-// 		this.started = true;
-// 	} 
-// battleship.js:33 stop: function (){
-// 		this.started = false; // started is a property of car object , to access you got to use this
-// 	} 
+why not work 
+for (prop in car){
+	console.log(prop + ": "  + car.prop + " ");
+}
+// using the dot notation to call the property (didn't work ). Can you tell why it is not working ?
 
-// this method not working, I'm getting undefined 
-
-
-// for (prop in car){
-// 	console.log(prop + ": "  + car.prop + " ");
-// }
-
-// objects contain state and behaviour 
+// It's because when you do car.prop the JavaScript compiler is literally looking for a property on your car called "prop", which none exists. Using the bracket notation here is a really good case of when you would actually want to use the brackets. When you use the dot notation, you have to know the exact name of the property you are looking for.
