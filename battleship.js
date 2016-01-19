@@ -1,90 +1,124 @@
 
-
-var x;
-
-console.log(x);   // x is declared, but not defined so it returns undefined
-
-
-// The type of undefined is undefined. Why? Well
-// our logic (work with us here) is this: it isn’t an object, or a number or
-// a string or a boolean, or really anything that is defined. So why not
-// make the type undefined, too? This is one of those weird twilight
-// zones of JavaScript you just have to accept.
-
-console.log(typeof x);  // prints undefined 
-
-var y = 5;
-
-console.log(y);  // 5
-console.log(typeof y);   // number
-
-var z = {};
-console.log(z);  //Object {}
-console.log(typeof z);    //object
+if (myNum = NaN){
+	myNum = 0;
+}  // wrong code 
 
 
-var a  = [];
-console.log(a); // []
-console.log(typeof a);  //object
+// Any sensible person would assume that’s how you test to see if a variable holds a
+// NaN value, but it doesn’t work. Why? Well, NaN isn’t equal to anything, not even
+// itself, so, any kind of test for equality with NaN is off the table. Instead you need
+// to use a special function: isNaN. Like this:
 
-var str = "im a nigga";
-console.log(str);  //im a nigga
-console.log(typeof str);  // string 
+// you got to use isNaN
 
-var arr = [2, 3];
-console.log(typeof arr);  // object 
-
-
-var f = function(){
-	return "boo";
+if (isNaN(myNum)) {
+myNum = 0;
 }
-console.log(f);  // prints the function body
-console.log(typeof f); // function
 
+var a= NaN;
 
-var p = document.getElementById("bd");  // bd not in the DOM
-
-console.log(p);  // when I print it returns null instead of undefined
-
-
-// There are many
-// languages that have the concept of a value that means “no object.”
-// And, it’s not a bad idea—take the document.getElementById
-// method. It’s supposed to return an object right? So, what happens
-// if it can’t? Then we want to return something that says “I would
-// have been an object if there was one, but we don’t have one.” And
-// that’s what null is.
-// You can also set a variable to null directly:
-// var killerObjectSomeday = null;
-// What does it mean to assign the value null to a variable? How about
-// “We intend to assign an object to this variable at some point, but we
-// haven’t yet.”
-
-var t = null;
-console.log(typeof t);   // prints object 
-
-// Remember, null is intended to represent
-// an object that isn’t there.
+console.log(a); // NaN
+console.log(typeof a);  // for some reason it prints NaN
 
 
 
-// NaN
+var c = 5/0;
 
-var a = 5/0;
-console.log(a);  //Infinity
+if (c==Infinity){
+	console.log(c);  // prints infinity
+}
 
 
-var b= 0/0;
-console.log(b); //NaN
+var a = null;
 
-var c = "str" * 50;
-console.log(c);  //Nan
+console.log(typeof a);  // object   //  sometimems it prints null 
 
-var c = "str" + 50;
-console.log(c);  //str50
+if (99 == "99"){
+	console.log("number equals string");  // prints this number equals string
+}
+else {
+	console.log("number not equals string");
+}
 
-var s = Math.sqrt(4);
-console.log(s);  //2 
+if (99 === "99"){
+	console.log("number equals string");  
+}
+else {
+	console.log("number not equals string");  // prints this bconz ===
+}
 
-var p = Math.sqrt(-4);
-console.log(p);  //NaN
+// If the two values have different types,
+// try to convert them into the same type and then compare them. javascript converts the string to a number 
+
+
+// remember boolean true converts to 1 and boolean false to zero 
+
+
+
+var b = true;
+
+if (b == 1){
+	console.log("1 converted to true");  //1 converted to true
+}
+
+// CASE#3: Comparing null and undefined.
+// Comparing these values evalutates to true. That might seem odd as well, but it’s the rule.
+// For some insight, these values both essentially represent “no value” (that is, a variable
+// with no value, or an object with no value), so they are considered to be equal.
+// undefined == null
+// Undefined and null are always equal.
+
+// === strict equality 
+// Two values are strictly equal only if they have
+// the same t ype and the s ame value.
+
+// JavaScript will try to convert “ninety-nine” to a number,
+// and it will fail, resulting in NaN. So the two values won’t be
+// equal, and the result will be false.
+
+// There are no <== and >== operators. You can use
+// only <= and >=.
+
+// What does it mean to say “banana” <
+// “mango”? Well, with strings, you can use alphabetical order
+// to know if one string is less than or greater than another.
+// Because “banana” begins with a “b” and “mango” with an “m”,
+// “banana” is less than “mango” because “b” comes before “m”
+// in the alphabet. And “mango” is less than “melon” because,
+// while the first letters are the same, when we compare the
+// second letters, “a” comes before “e”.
+// This alphabetical comparison can trip you up, however; for
+// instance, “Mango” < “mango” is true, even though you might
+// think that “M” is greater than “m” because its “M” is capitalized.
+// The ordering of strings has to do with the ordering of the
+// Unicode values that are used to represent each character
+// in the computer (Unicode is a standard for representing
+// characters digitally), and that ordering might not always be
+// what you expect! For all the details, try googling “Unicode”.
+// But most of the time, the basic alphabetical ordering is all you
+// need to know if one string is less than or greater than another
+
+// When it comes the other arithmetic operators—like multiplication, division and subtraction—
+// JavaScript prefers to treat those as arithmetic operations, not string operations.
+
+// var order = 1 + 2 + " pizzas";
+// you’ll get “3 pizzas”, not "12 pizzas" because, moving left to right, 1
+// is added to 2 first (and both are numbers), which results in 3. Next
+// we add 3 and a string, so 3 is converted to a string and concatenated
+// with "pizza". To make sure you get the results you want, you can
+// always use parentheses to force an operator to be evaluated first:
+// var order = (1 + 2) + " pizzas";
+// ensures you’ll get 3 pizzas, and
+// var order = 1 + (2 + " pizzas");
+// ensures you’ll get 12 pizzas.
+
+
+// There’s a function that does this named Number (yes, it has a
+// uppercase N). Use it like this:
+// var num = 3 + Number("4");
+// This statement results in num being assigned the value 7. The
+// Number function takes an argument, and if possible, creates a
+// number from it. If the argument can’t be converted to a number,
+// Number returns.... wait for it..... NaN.
+
+
