@@ -1,42 +1,52 @@
 
-function init(){
-	var access1 = document.getElementById("code1");  // getting the whole elemnt 
 
-	access1.style.color = "blue";
-	var html = access1.innerHTML;
+var changeBody = document.getElementById("bdy");
+changeBody.innerHTML = "<strong>Im a niggaa </strong>"; 
 
-	var abc = document.getElementById("uno");
-	// The innerHTML property sets or returns the HTML content (inner HTML) of an element.
-	console.log(access1);  //<p id="code1">ealgle1</p>
-
-	console.log(html);   //ealgle1
-	console.log(abc);  
-	// <ul id="uno">
-	// 	<li>ONE</li>
-	// 	<li>TWO</li>
-	// 	<li>THREE</li>
-
-	// </ul>
-	console.log(abc.innerHTML);
-}
-window.onload = init;   // take window object and assign our function to its onload property 
-// the window object will call any function you have assigned to its onload property, but only after the page is fully loaded. 
- console.log(window);
-  console.dir(window);
-
-    console.dir(document);
-
-// Window is the main JavaScript object root, aka the global object in a browser, also can be treated as the root of the document object model. You can access it as window in most of the cases (in the browser);
-
-// window.screen is a small information object about physical screen dimensions.
-
-// window.document or just document is the main object of the visible document object model/DOM.
+// think font will be applied. I'm chaning whole body itself 
 
 
-//  Well, the window is the first thing that gets loaded into the browser. This window object has the majority of the properties like length, innerWidth, innerHeight, name, if it has been closed, its parents, and more.
 
-// What about the document object then? The document object is your html, aspx, php, or other document that will be loaded into the browser. The document actually gets loaded inside the window object and has properties available to it like title, URL, cookie, etc. What does this really mean? That means if you want to access a property for the window it is window.property, if it is document it is window.document.property which is also available in short as document.property.
+// If you try to get an element from the DOM by id,
+// and that id doesn’t exist in an element, then the call to
+// getElementById returns a null value. Testing for null is
+// a good idea when you use getElementById to ensure
 
-// The window object represents the current browsing context. It holds things like window.location, window.history, window.screen, window.status, or the window.document. Also, it has information about the framing setup (the frames, parent, top, self properties), and holds important interfaces such as applicationCache, XMLHttpRequest, setTimeout, escape, console or localStorage. Last but not least it acts as the global scope for JavaScript, i.e. all global variables are properties of it.
+// When the browser loads and
+// parses your HTML file, it creates an element object for
+// every element in your page,and adds all those element
+// objects to the DOM. So the DOM is really just a big
+// tree of element objects. And, keep in mind that, just like
+// other objects, element objects can have properties, like
+// innerHTML, and methods, too. We’ll explore a few more
+// of the properties and methods of element
 
-// In contrast, the (window.)document object represents the DOM that is currently loaded in the window - it's just a part of it. A document holds information like the documentElement (usually <html>), the forms collection, the cookie string, its location, or its readyState. It also implements a different interface (there might be multiple Documents, for example an XML document obtained via ajax), with methods like getElementById or addEventListener.
+// innerHTML gives you a convenient way to
+// replace the content of an element. And, yes, you could
+// use it to replace the content of the <body> element,
+// which would result in your entire page being replaced
+// with something new.
+
+
+// window.onload = init;
+
+// Let’s think about how onload works just a bit more, because it uses a common
+// coding pattern you’ll see over and over again in JavaScript.
+// Let’s say there’s a big important event that’s going to occur, and you definitely want
+// to know about it. Say that event is the “page is loaded” event. Well, a common way
+// to deal with that situation is through a callback, also known as an event handler.
+// A callback works like this: give a function to the object that knows about the event.
+// When the event occurs, that object will call you back, or notify you, by calling that
+// function. You’re going to see this pattern in JavaScript for a variety of events.
+
+// You’ve seen an example of “the page is loaded” event,
+// which we handle by setting the onload property of the
+// window object. You can also write event handlers that
+// handle things like “call this function every five seconds,”
+// or “some data arrived from a web service that we need
+// to deal with,” or “the user clicked a button and we need
+// to get some data from a form,” and there are many more.
+// All these types of events are heavily used when you’re
+// creating pages that act more like applications than static
+// documents (and who doesn’t want that). Right now, we’ve
+// had just a brief glimpse of event handlers,
