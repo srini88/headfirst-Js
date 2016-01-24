@@ -31,6 +31,10 @@
 
 function onHandle(){
 	console.log("page is fully loaded");
+
+	// now get the image 
+	var img = document.getElementById("blur");
+	img.onclick = showAnotherImg;
 }
 
 window.onload = onHandle;
@@ -60,11 +64,29 @@ window.onload = onHandle;
 // onload property.
 
 
-function changeImage(){
+function showAnotherImg(){
 	var img = document.getElementById("blur");
-	img.setAttribute("src", "zeroblur.jpg");
-	console.log(img);
+	img.src = "zeroblur.jpg";
 }
+
+// Ah, yes. It can get tricky to follow the
+// flow of execution in code with a lot of
+// event handlers. Remember, the init function is
+// called when the page is loaded. But the showAnswer
+// function isn’t called until later, when you click the
+// image. So these two event handlers get called at two
+// different times.
+// In addition, remember your scope rules. In the
+// init function we’re putting the object returned by
+// getElementById into a local variable image, which
+// means when that function completes, the variable
+// falls out of scope and is destroyed. So later, when the
+// showAnswer function is called, we have to get the
+// image object again from the DOM. Sure, we could
+// have put this in a global variable, but over use of
+// globals can lead to confusing and buggy code, which
+// we’d like to avoid.
+
 
 
 // Computer science types like
