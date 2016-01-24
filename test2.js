@@ -36,6 +36,37 @@ function onHandle(){
 window.onload = onHandle;
 
 
+// want to change the image on click 
+// Lucky for us, every time an HTML element in the page is clicked
+// (or touched on a mobile device), an event is generated. Your job is to
+// create a handler for that event, and in it write the code to display the
+// unblurred version of the image. Here’s how you’re going to do that
+
+// Access the image object in the DOM and
+// assign a handler to its onclick property.
+// In your handler, write the code to change the
+// image src attribute from the blurred image to
+// the unblurred one.
+
+// Oh, but we also need this code to run only after the DOM for the
+// page has been created, so let’s use the window’s onload property
+// to ensure that. We’ll place our code into a function, init, that we’ll
+// assign to the onload property.
+
+// Remember in JavaScript the order
+// in which you define your functions
+// doesn’t matter. So we can define
+// init after we assign it to the
+// onload property.
+
+
+function changeImage(){
+	var img = document.getElementById("blur");
+	img.setAttribute("src", "zeroblur.jpg");
+	console.log(img);
+}
+
+
 // Computer science types like
 // to say that this kind of code is asynchronous, because we’re writing code to be
 // invoked later, if and when an event occurs. This kind of coding also changes your
