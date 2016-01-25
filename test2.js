@@ -6,7 +6,7 @@ function init(){
 	var images = document.getElementsByTagName("img");
 
 	for (var i =0; i < images.length ; i++){
-		images[i].onclick  = changeImg;
+		images[i].onmouseover  = changeImg;
 	}
 }
 
@@ -18,10 +18,12 @@ function changeImg(eventObj){
 	var name = img.id;
 	name = name + "blur.jpg";
 	img.src = name;
+	img.onmouseout = reblur;
 	setTimeout(reblur, 3000, img);   // im passing img to figure out what image to be reverted back  =  3rd attribute 
 }
 
-function reblur(img){
+function reblur(eventObj){
+	var img = eventObj.target;
 	var id = img.id;
 	var name = id+".jpg";
 	img.src = name;
