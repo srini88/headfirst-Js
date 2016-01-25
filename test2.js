@@ -59,69 +59,38 @@
 
 function onHandle(){
 	console.log("page is fully loaded");
-
-	// getting multiple images - using the method getElementsByTagName
-// 	This
-// finds every image in the page and
-// returns them all. We store the
-// resulting images in the images variable
-	var images = document.getElementsByTagName("img");
-	console.log(images);
-// 	Then we iterate over the images,
-// and assign the showAnswer click
-// handler to each image in turn. Now
-// the onclick property of each image
-// is set to the showAnswer handler.
-	for (var i=0; i < images.length ; i++){
-		images[i].onclick = showAnotherImg;	
-		// when you clcik it causes an eventObj to be created , can be any name in the parameter , not necessarily eventObj
-	}
-	
+	var image = document.getElementById("zero");
+	image.onmousemove = showCoords;
+		
 }
 
 window.onload = onHandle;
 
-function showAnotherImg(eventObj){   // eventObj is passed internally
-// 	In the handler, you can use the event object to determine
-// things about the event, like what type of event occurred,
-// and which element generated the event, and so on.
-// So, what is in an event object? Like we said, both general and specific
-// information about the event. The specific information depends on the type of
-// the event, and we’ll come back to that a bit. The general information includes
-// the target property that holds a reference to the object that generated the
-// event. So, if you click on a page element, like an image, that’s the target, and
-// we can access it like this
+function showCoords(eventObj){   // eventObj is passed internally
 
-
-	var image = eventObj.target;
-	console.log(image);  //<img id="zero" class="change" src="zero.jpg">
-	name = image.id;  // get teh id from the image 
-	// change the image to teh new image 
-	name = name +"blur.jpg";
-	image.src = name;
-
+	var map = document.getElementById("coords");
+	// get these 
+	console.log(eventObj);
+	var x = eventObj.clientX;
+	var y = eventObj.clientY;
+	map.innerHTML = "Map coordinates are : " + x + ", " + y;
 }
 
-// There are. We’ve got network-based events,
-// timer events, DOM events related to the page and a few
-// others. Some kinds of events, like DOM events, generate
-// event objects that contain a lot more detail about the
-// event—like a mouse click event will have information
-// about where the user clicked, and a keypress event will
-// have information about which key was pressed, and so on.
 
-// You already know that the browser maintains a queue of events. And
-// that behind the scenes the browser is constantly taking events off that
-// queue and processing them by calling the appropriate event handler for
-// them, if there is one.
+// type  - I’m a string, like “click” or “load”, that tells you
+// what just happened.
 
+// timeStamp  - Want to know when your event happened? I’m
+// the property for you.
 
-// It’s important to know that the browser processes these events one at a time,
-// so, where possible, you need to keep your handlers short and efficient. If
-// you don’t, the whole event queue could stack up with waiting events, and
-// the browser will get backed up dealing with them all. The downside to you?
-// Your interface could really start to become slow and unresponsive.
+// keyCode - I’ll tell you what key the user just pressed
 
+// clientX   - Want to know how far from the left side of the
+// browser window the user clicked? Use me.
 
+// clientY   - Want to know how far from the top of the
+// browser window the user clicked? Use me.
 
+// touches   - Using a touch device? Then use me to find out
+// how many fingers are touching the screen.
 
