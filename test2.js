@@ -1,16 +1,28 @@
 
+window.onload = init;
 
-var timerObj = setInterval(timeFunc, 1000);
+function init(){
 
-function timeFunc(){
-	var date = new Date();   
-	coords.innerHTML = date;  //Sun Jan 24 2016 19:09:57 GMT-0600 (Central Standard Time)
-	//coords.innerHTML = date.toLocaleString();  //1/24/2016, 7:09:05 PM
+	var images = document.getElementsByTagName("img");
+
+	for (var i =0; i < images.length ; i++){
+		images[i].onclick  = changeImg;
+	}
 }
 
-var t = document.getElementById("stopTime");
-t.onclick = clearTime;
+function changeImg(eventObj){
+	// get single image
+	var img = eventObj.target;
+	//var name = img.src;
+	//console.log(name); //http://localhost/rejuvenate/headfirst-Js/one.jpg
+	var name = img.id;
+	name = name + "blur.jpg";
+	img.src = name;
+	setTimeout(reblur, 3000, img);   // im passing img to figure out what image to be reverted back  =  3rd attribute 
+}
 
-function clearTime(){
-	clearInterval(timerObj);
+function reblur(img){
+	var id = img.id;
+	var name = id+".jpg";
+	img.src = name;
 }
