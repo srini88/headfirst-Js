@@ -29,69 +29,99 @@
 // window object, like this:
 
 
+
+// That’s true. But I’m not sure I know how to
+// use the same event handler for multiple images.
+
+
+// Assign the showAnswer click handler function
+// to every image on the page.
+// Rework showAnswer to handle unblurring any
+// image, not just zero.jpg.
+
+
+// Here’s our first hurdle: in the current code we use the getElementById method to grab
+// a reference to image “zero”, and assign the showAnswer function to its onclick property.
+// Rather than hardcoding a call to getElementById for each image, we’re going to show
+// you an easier way: we’ll grab all the images at once, iterate through them, and set up the
+// click handler for each one
+
+// When the click handler is called, it’s passed an event object—and in fact, for most
+// of the events associated with the document object model (DOM) you’ll be passed
+// an event object. The event object contains general information about the event,
+// such as what element generated the event and what time the event happened. In
+// addition, you’ll get information specific to the event, so if there was a mouse click,
+// for instance, you’ll get the coordinates of the click.
+
+// The event object’s target property
+// is a reference to the image element
+// that was clicked.
+
 function onHandle(){
 	console.log("page is fully loaded");
 
-	// now get the image 
-	var img = document.getElementById("blur");
-	img.onclick = showAnotherImg;
+	// getting multiple images - using the method getElementsByTagName
+// 	This
+// finds every image in the page and
+// returns them all. We store the
+// resulting images in the images variable
+	var images = document.getElementsByTagName("img");
+	console.log(images);
+// 	Then we iterate over the images,
+// and assign the showAnswer click
+// handler to each image in turn. Now
+// the onclick property of each image
+// is set to the showAnswer handler.
+	for (var i=0; i < images.length ; i++){
+		images[i].onclick = showAnotherImg;	
+		// when you clcik it causes an eventObj to be created , can be any name in the parameter , not necessarily eventObj
+	}
+	
 }
 
 window.onload = onHandle;
 
-
-// want to change the image on click 
-// Lucky for us, every time an HTML element in the page is clicked
-// (or touched on a mobile device), an event is generated. Your job is to
-// create a handler for that event, and in it write the code to display the
-// unblurred version of the image. Here’s how you’re going to do that
-
-// Access the image object in the DOM and
-// assign a handler to its onclick property.
-// In your handler, write the code to change the
-// image src attribute from the blurred image to
-// the unblurred one.
-
-// Oh, but we also need this code to run only after the DOM for the
-// page has been created, so let’s use the window’s onload property
-// to ensure that. We’ll place our code into a function, init, that we’ll
-// assign to the onload property.
-
-// Remember in JavaScript the order
-// in which you define your functions
-// doesn’t matter. So we can define
-// init after we assign it to the
-// onload property.
+function showAnotherImg(eventObj){   // eventObj is passed internally
+// 	In the handler, you can use the event object to determine
+// things about the event, like what type of event occurred,
+// and which element generated the event, and so on.
+// So, what is in an event object? Like we said, both general and specific
+// information about the event. The specific information depends on the type of
+// the event, and we’ll come back to that a bit. The general information includes
+// the target property that holds a reference to the object that generated the
+// event. So, if you click on a page element, like an image, that’s the target, and
+// we can access it like this
 
 
-function showAnotherImg(){
-	var img = document.getElementById("blur");
-	img.src = "zeroblur.jpg";
+	var image = eventObj.target;
+	console.log(image);  //<img id="zero" class="change" src="zero.jpg">
+	name = image.id;  // get teh id from the image 
+	// change the image to teh new image 
+	name = name +"blur.jpg";
+	image.src = name;
+
 }
 
-// Ah, yes. It can get tricky to follow the
-// flow of execution in code with a lot of
-// event handlers. Remember, the init function is
-// called when the page is loaded. But the showAnswer
-// function isn’t called until later, when you click the
-// image. So these two event handlers get called at two
-// different times.
-// In addition, remember your scope rules. In the
-// init function we’re putting the object returned by
-// getElementById into a local variable image, which
-// means when that function completes, the variable
-// falls out of scope and is destroyed. So later, when the
-// showAnswer function is called, we have to get the
-// image object again from the DOM. Sure, we could
-// have put this in a global variable, but over use of
-// globals can lead to confusing and buggy code, which
-// we’d like to avoid.
+// There are. We’ve got network-based events,
+// timer events, DOM events related to the page and a few
+// others. Some kinds of events, like DOM events, generate
+// event objects that contain a lot more detail about the
+// event—like a mouse click event will have information
+// about where the user clicked, and a keypress event will
+// have information about which key was pressed, and so on.
+
+// You already know that the browser maintains a queue of events. And
+// that behind the scenes the browser is constantly taking events off that
+// queue and processing them by calling the appropriate event handler for
+// them, if there is one.
+
+
+// It’s important to know that the browser processes these events one at a time,
+// so, where possible, you need to keep your handlers short and efficient. If
+// you don’t, the whole event queue could stack up with waiting events, and
+// the browser will get backed up dealing with them all. The downside to you?
+// Your interface could really start to become slow and unresponsive.
 
 
 
-// Computer science types like
-// to say that this kind of code is asynchronous, because we’re writing code to be
-// invoked later, if and when an event occurs. This kind of coding also changes your
-// perspective from one of encoding an algorithm step-by-step into code, into one of
-// gluing together an application that is composed of many handlers handling many
-// different kinds of events.
+
