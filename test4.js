@@ -1,40 +1,37 @@
 
-// page 475: 
-
-// serious functions
-
-// anonymous function and a closure 
+//fly();  //im getting vUncaught TypeError: fly is not a functio
 
 
-
-// function handler (){
-// 	console.log("page loaded ! ");  // you see this printed 
-// }
-
-
-// window.onload = handler; // when the page loads, the handler function is invoked 
-
-// An anonymous function is just a
-// function expression without a name that’s used where we’d normally use a function reference
-
-// since handler will only be called once, it is unnecessary to have a function defined. 
-
-// so directly do this 
-
-window.onload = function(){console.log("page load done ! ");};
-
-
-function annoy (){
-	console.log("I'm annoying");
+var fly = function() {
+	console.log("I'm flying");
 }
 
 
-//setTimeout(annoy, 1000);   // setTimeOut will be called just once 
 
-setTimeout(function (){ console.log("nigga");}, 1000);  // I have chnaged the function to be anonymous function 
 
-// Hey, wait a sec, I think I get it. Because a
-// function expression evaluates to a function
-// reference, you can substitute a function
-// expression anywhere you’d expect a
-// reference?
+// So what does this all mean? For starters, it means that you can place function
+// declarations anywhere in your code—at the top, at the bottom, in the middle—and
+// invoke them wherever you like. Function declarations create functions that are defined
+// everywhere in your code (this is known as hoisting).
+
+
+// Here’s the
+// short answer: the only difference between a function defined at the top level of your code and
+// one that’s defined within another function is just a matter of scope. In other words, placing a
+// function in another function affects where the function is visible within your code.
+
+
+// review of lexical scope 
+
+var justAVar = "global";
+
+
+function WhereAreYou(){
+	var justAVar = "local";
+	return justAVar;    // returns local 
+}
+
+var result = WhereAreYou();
+console.log(result);  // you get local here 
+
+//492
