@@ -1,62 +1,68 @@
+// A closure results when we combine a
+// function that has free variables with
+// an environment that provides variable
+// bindings for all those free variables.
 
-function foo(){
-	console.log("logging foo");
 
 
-	function bar(){
-		console.log("loggin bar");
+// writing a counter without closures, by using globals
+
+
+var count = 0;
+
+function counter(){
+	count = count+1;
+	return count;
+}
+
+console.log(counter());   //1
+console.log(counter());		//2
+console.log(counter());		//3
+
+// sO NOW, What if we were to tell you there is a way to implement a counter with a totally local
+// and protected count variable?
+// That way, you’ll have a counter that no other code
+// can ever clash with, and the only way to increment the counter value is through the
+// function (otherwise known as a closure).
+
+// 
+
+function makeCounter(){
+	var count = 0 ;      // put count in makeCounter fun, so count is a local variable 
+
+	function counter(){
+		count = count+1;
+		return count;
 	}
-	return bar;
+
+	return counter;   // return the counter function 
 }
 
 
- var something = foo();  // causes logging foo to get printed on screen and something gets bar 
 
+var doCount = makeCounter();
 
-// console.log(something);   //which prints function bar(){
-// 		//console.log("loggin bar");
-// 	//}
+console.log(doCount());  //1   // this second way we got it to work 
+console.log(doCount());   //2
+console.log(doCount());  //3
 
-something(); // you run something which runs bar ()  (this is the final closure)
+// We call makeCounter, which creates a
+// counter function and returns it along with an
+// environment containing the free variable, count.
+// In other words, it creates a closure.
 
+// When we call makeCounter, we get back a closure: a function with an
+// environment.
 
-// closure = function + outer context   (variable this function relies on )
-
-// (the function is usually created/returned by another function)
-
-// A real-life closure
-// A closure is a function with access to variables in its containing scope (the function “closes over” the variables). The thing that can be tricky to wrap your head round is that the inner function still has access to the outer function’s variables after the outer function has returned
-
-function outer(){
-
-	var counter = 3;
-	console.log(counter);
-
-	function inner(){
-		counter = counter+1; 
-		console.log(counter);
-	}
-
-	return inner;
-}
-
-
-
-var x = outer();  // prints 3
-
-x();  //4
-x(); //5
-// In this code, outer is called once, and returns inner. x is a reference to inner. Because inner is a closure, it has access to outer‘s local variable, counter. Even though outer has returned, inner still has access to outer‘s variables. Be careful though – if outer were called again, we’d get a new version of inner. To continue the previous example:
-
-
-// In JavaScript, using simple terms,  if we create a function inside another function, we are creating a closure. 
-
-// In most common languages, after a function returns, all the local variables are no longer accessible because the stack-frame is destroyed.  Keeping this in mind a closure can be considered as a stack-frame which is not deallocated when the function returns. 
-
-
-var y = outer();  // prints 3
-
-x();  //6
-x();   //7
-
-y();  //4
+// We call makeCounter, which creates a
+// counter function and returns it along with an
+// environment containing the free variable, count.
+// In other words, it creates a closure. The function
+// returned from makeCounter is stored in doCount.
+// 2 ) We call the function doCount. This executes the
+// body of the counter function.
+// 3 ) When we encounter the variable count, we look it
+// up in the environment, and retrieve its value. We
+// increment count, save the new value back into
+// the environment, and return that new value to
+// where doCount was called.
