@@ -1,68 +1,41 @@
-// A closure results when we combine a
-// function that has free variables with
-// an environment that provides variable
-// bindings for all those free variables.
+//521 creating objects 
+
+// learning about object constructors 
+// With constructors we can create objects much more easily,
+// and we can create objects that all adhere to the same design blueprint—meaning
+// we can use constructors to ensure each object has the same properties and
+// includes the same methods. And with constructors we can write object code that is
+// much more concise and a lot less error prone when we’re creating lots of objects.
+// So, let’s get started and after this chapter you’ll be talking constructors just like you
+// grew up in Objectville
 
 
 
-// writing a counter without closures, by using globals
+// Object literals give you a convenient way to create objects anywhere in your code,
+// but when you need to create lots of objects—say a whole fleet of taxis—you
+// wouldn’t want to type in a hundred different object literals now would you?
 
-
-var count = 0;
-
-function counter(){
-	count = count+1;
-	return count;
+var taxi = {
+make: "Webville Motors",
+model: "Taxi",
+year: 1955,
+color: "yellow",
+passengers: 4,
+convertible: false,
+mileage: 281341,
+started: false,
+start: function() {
+	this.started = true;
 }
+};
 
-console.log(counter());   //1
-console.log(counter());		//2
-console.log(counter());		//3
+console.log(taxi.started);
+console.log(taxi.start());
+console.log(taxi.started);
 
-// sO NOW, What if we were to tell you there is a way to implement a counter with a totally local
-// and protected count variable?
-// That way, you’ll have a counter that no other code
-// can ever clash with, and the only way to increment the counter value is through the
-// function (otherwise known as a closure).
+// Object constructors, or “constructors” for short, are your path to better
+// object creation. Think of a constructor like a little factory that can
+// create an endless number of similar objects.
 
-// 
-
-function makeCounter(){
-	var count = 0 ;      // put count in makeCounter fun, so count is a local variable 
-
-	function counter(){
-		count = count+1;
-		return count;
-	}
-
-	return counter;   // return the counter function 
-}
-
-
-
-var doCount = makeCounter();
-
-console.log(doCount());  //1   // this second way we got it to work 
-console.log(doCount());   //2
-console.log(doCount());  //3
-
-// We call makeCounter, which creates a
-// counter function and returns it along with an
-// environment containing the free variable, count.
-// In other words, it creates a closure.
-
-// When we call makeCounter, we get back a closure: a function with an
-// environment.
-
-// We call makeCounter, which creates a
-// counter function and returns it along with an
-// environment containing the free variable, count.
-// In other words, it creates a closure. The function
-// returned from makeCounter is stored in doCount.
-// 2 ) We call the function doCount. This executes the
-// body of the counter function.
-// 3 ) When we encounter the variable count, we look it
-// up in the environment, and retrieve its value. We
-// increment count, save the new value back into
-// the environment, and return that new value to
-// where doCount was called.
+// Using constructors is a two-step process: first we define a constructor, and then
+// we use it to create objects. Let’s first focus on creating a constructor.
